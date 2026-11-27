@@ -1,15 +1,15 @@
 {
   "id": "lnurlmint",
   "name": "lnurlmint",
-  "repo": "https://github.com/bitkarrot/lnurlmint",
+  "repo": "https://github.com/lnurlcash/lnurlmint-extension",
   "short_description": "Mint Lightning-funded bearer notes (LUD-25 lnurlcash)",
-  "description_md": "https://raw.githubusercontent.com/bitkarrot/lnurlmint/main/description.md",
+  "description_md": "https://raw.githubusercontent.com/lnurlcash/lnurlmint-extension/main/description.md",
   "images": [
     {
-      "uri": "https://raw.githubusercontent.com/bitkarrot/lnurlmint/main/static/image/extension-mints.png"
+      "uri": "https://raw.githubusercontent.com/lnurlcash/lnurlmint-extension/main/static/image/extension-mints.png"
     },
     {
-      "uri": "https://raw.githubusercontent.com/bitkarrot/lnurlmint/main/static/image/extension-public-mint.png"
+      "uri": "https://raw.githubusercontent.com/lnurlcash/lnurlmint-extension/main/static/image/extension-public-mint.png"
     }
   ],
   "tile": "/lnurlmint/static/image/lnurlmint.png",

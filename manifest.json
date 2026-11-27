@@ -2,8 +2,8 @@
   "repos": [
     {
       "id": "lnurlmint",
-      "organisation": "bitkarrot",
-      "repository": "lnurlmint"
+      "organisation": "lnurlcash",
+      "repository": "lnurlmint-extension"
     }
   ]
 }

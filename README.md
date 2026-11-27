@@ -51,7 +51,7 @@ Redeem notes with [lnurl-wallet](https://github.com/dni/lnurl-wallet) (hosted at
 
 ```sh
 cd lnbits/lnbits/extensions
-git clone https://github.com/bitkarrot/lnurlmint.git
+git clone https://github.com/lnurlcash/lnurlmint-extension.git
 ```
 
 Restart LNbits. The extension appears in the extensions list.
