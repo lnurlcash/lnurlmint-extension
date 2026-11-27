@@ -67,7 +67,7 @@ async def api_create_mint(
         updated_at=now,
     )
     await create_mint(mint)
-    return MintResponse(**mint.dict(exclude={"mint_privkey"})).dict()
+    return MintResponse(**mint.model_dump(exclude={"mint_privkey"})).model_dump()
 
 
 @lnurlmint_api_router.get("")
@@ -76,7 +76,7 @@ async def api_get_mints(
 ) -> list:
     """List all mints owned by the authenticated wallet (wallet-scoped)."""
     mints = await get_mints_by_wallet(wallet.wallet.id)
-    return [MintResponse(**m.dict(exclude={"mint_privkey"})).dict() for m in mints]
+    return [MintResponse(**m.model_dump(exclude={"mint_privkey"})).model_dump() for m in mints]
 
 
 @lnurlmint_api_router.get("/{mint_id}")
@@ -92,7 +92,7 @@ async def api_get_mint(
     mint = await get_mint(mint_id, wallet.wallet.id)
     if mint is None:
         raise HTTPException(status_code=404, detail="Mint not found")
-    return MintResponse(**mint.dict(exclude={"mint_privkey"})).dict()
+    return MintResponse(**mint.model_dump(exclude={"mint_privkey"})).model_dump()
 
 
 @lnurlmint_api_router.put("/{mint_id}")
@@ -108,11 +108,11 @@ async def api_update_mint(
     another wallet. Immutable fields (id, wallet, mint_privkey,
     timestamps) are excluded by the UpdateMint model.
     """
-    fields = {k: v for k, v in data.dict().items() if v is not None}
+    fields = {k: v for k, v in data.model_dump().items() if v is not None}
     mint = await update_mint(mint_id, wallet.wallet.id, **fields)
     if mint is None:
         raise HTTPException(status_code=404, detail="Mint not found")
-    return MintResponse(**mint.dict(exclude={"mint_privkey"})).dict()
+    return MintResponse(**mint.model_dump(exclude={"mint_privkey"})).model_dump()
 
 
 @lnurlmint_api_router.delete("/{mint_id}")
