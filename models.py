@@ -1,13 +1,13 @@
-"""Pydantic v1 models for the lnurlmint extension.
+"""Pydantic v2 models for the lnurlmint extension.
 
-All models use pydantic v1 syntax (BaseModel, validator, root_validator,
-class Config) — LNbits pins pydantic 1.10.26.
+LNbits 1.7.x runs pydantic 2 — validators use field_validator /
+model_validator, serialization is model_dump().
 """
 
 from datetime import datetime, timezone
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, root_validator, validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 def _parse_created_at(v):
@@ -110,11 +110,11 @@ class CreateMint(BaseModel):
     base_url: str = ""
     onion_url: Optional[str] = None
 
-    @root_validator
-    def _sendable_bounds_ordered(cls, values):
-        if values.get("min_sendable_msat", 0) > values.get("max_sendable_msat", 0):
+    @model_validator(mode="after")
+    def _sendable_bounds_ordered(self):
+        if self.min_sendable_msat > self.max_sendable_msat:
             raise ValueError("min_sendable_msat must be <= max_sendable_msat")
-        return values
+        return self
 
 
 class UpdateMint(BaseModel):
@@ -142,14 +142,14 @@ class UpdateMint(BaseModel):
     base_url: Optional[str] = None
     onion_url: Optional[str] = None
 
-    @root_validator
-    def _sendable_bounds_ordered(cls, values):
+    @model_validator(mode="after")
+    def _sendable_bounds_ordered(self):
         # Only validate when both bounds are explicitly provided.
-        min_s = values.get("min_sendable_msat")
-        max_s = values.get("max_sendable_msat")
+        min_s = self.min_sendable_msat
+        max_s = self.max_sendable_msat
         if min_s is not None and max_s is not None and min_s > max_s:
             raise ValueError("min_sendable_msat must be <= max_sendable_msat")
-        return values
+        return self
 
 
 class Note(BaseModel):
@@ -172,7 +172,7 @@ class Note(BaseModel):
     locked_at: int = 0
     created_at: datetime
 
-    @validator("created_at", pre=True)
+    @field_validator("created_at", mode="before")
     def _parse_created_at(cls, v):
         return _parse_created_at(v)
 
@@ -221,7 +221,7 @@ class MintRecord(BaseModel):
     zap_receipt: Optional[str] = None
     created_at: datetime
 
-    @validator("created_at", pre=True)
+    @field_validator("created_at", mode="before")
     def _parse_created_at(cls, v):
         return _parse_created_at(v)
 
@@ -241,7 +241,7 @@ class MeltRecord(BaseModel):
     settled: bool
     created_at: datetime
 
-    @validator("created_at", pre=True)
+    @field_validator("created_at", mode="before")
     def _parse_created_at(cls, v):
         return _parse_created_at(v)
 
@@ -263,7 +263,7 @@ class UsernameRegistration(BaseModel):
     next_index: int = 0
     created_at: datetime
 
-    @validator("created_at", pre=True)
+    @field_validator("created_at", mode="before")
     def _parse_created_at(cls, v):
         return _parse_created_at(v)
 
