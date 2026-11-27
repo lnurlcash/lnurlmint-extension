@@ -1,9 +1,22 @@
 {
-  "repos": [
+  "extensions": [
     {
       "id": "lnurlmint",
-      "organisation": "lnurlcash",
-      "repository": "lnurlmint-extension"
+      "name": "lnurlmint",
+      "version": "0.3.0",
+      "archive": "https://github.com/lnurlcash/lnurlmint-extension/releases/download/v0.3.0/lnurlmint-0.3.0.zip",
+      "hash": "64c50de459cc0b937c21d58b44457419c13e0b30160527f0b21ee4e3f152241b",
+      "repo": "https://github.com/lnurlcash/lnurlmint-extension",
+      "icon": "https://raw.githubusercontent.com/lnurlcash/lnurlmint-extension/main/static/image/lnurlmint.png",
+      "short_description": "Mint Lightning-funded bearer notes (LUD-25 lnurlcash)",
+      "min_lnbits_version": "1.7.1",
+      "max_lnbits_version": null,
+      "html_url": "https://github.com/lnurlcash/lnurlmint-extension/releases/tag/v0.3.0",
+      "details_link": "https://raw.githubusercontent.com/lnurlcash/lnurlmint-extension/main/config.json",
+      "dependencies": []
     }
-  ]
+  ],
+  "repos": [],
+  "featured": [],
+  "categories": {}
 }
